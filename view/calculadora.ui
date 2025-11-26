@@ -370,7 +370,7 @@
      <string>=</string>
     </property>
     <property name="shortcut">
-     <string>=</string>
+     <string>Return</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_menos">
