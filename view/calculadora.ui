@@ -469,9 +469,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>20</y>
+      <y>70</y>
       <width>211</width>
-      <height>101</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -507,6 +507,27 @@
     </property>
     <property name="shortcut">
      <string>Ctrl+S</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="display2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
     </property>
    </widget>
   </widget>
