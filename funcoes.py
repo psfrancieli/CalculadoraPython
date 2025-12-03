@@ -15,3 +15,7 @@ def dividir(num1, num2):
         return "Não é possível dividir por 0"
     resultado = num1 / num2
     return resultado
+
+def porcentagem(num1, num2):
+    resultado = (num1 / 100) * num2
+    return resultado

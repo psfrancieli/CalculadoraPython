@@ -330,7 +330,7 @@
      <string>%</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_sl">
+   <widget class="QPushButton" name="btn_inv">
     <property name="geometry">
      <rect>
       <x>80</x>

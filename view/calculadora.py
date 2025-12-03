@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QShortcut
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QKeySequence
-from funcoes import somar
+from funcoes import somar, dividir, multiplicar, subtrair, porcentagem
 
 class Calculadora(QMainWindow):
     def __init__(self, **kwargs):
@@ -9,7 +9,18 @@ class Calculadora(QMainWindow):
         loadUi("view/calculadora.ui", self)
         self.show()
 
-        # QShortcut(QKeySequence("0"), self).activated.connect(lambda: self.addNumber(0))
+        self.num1 = 0
+        self.num2 = 0
+
+        self.selectedOperation = None
+        self.operationList = {
+            "+": somar,
+            "-": subtrair,
+            "x": multiplicar,
+            "÷": dividir,
+            "%": porcentagem
+        }
+
         self.btn_1.clicked.connect(lambda: self.addNumber(1))
         self.btn_2.clicked.connect(lambda: self.addNumber(2))
         self.btn_3.clicked.connect(lambda: self.addNumber(3))
@@ -21,12 +32,15 @@ class Calculadora(QMainWindow):
         self.btn_9.clicked.connect(lambda: self.addNumber(9))
         self.btn_0.clicked.connect(lambda: self.addNumber(0))
         self.btn_ac.clicked.connect(self.cleanDisplay)
+        self.btn_del.clicked.connect(self.deletar)
+        self.btn_inv.clicked.connect(self.invert)
         self.btn_igual.clicked.connect(self.showResult)
         self.btn_vir.clicked.connect(self.addComma)
-        self.btn_mais.clicked.connect(self.setOperation)
-        self.btn_menos.clicked.connect(self.setOperation)
-        self.btn_vezes.clicked.connect(self.setOperation)
-        self.btn_div.clicked.connect(self.setOperation)
+        self.btn_mais.clicked.connect(lambda: self.setOperation("+"))
+        self.btn_menos.clicked.connect(lambda: self.setOperation("-"))
+        self.btn_vezes.clicked.connect(lambda: self.setOperation("x"))
+        self.btn_div.clicked.connect(lambda: self.setOperation("÷"))
+        self.btn_por.clicked.connect(lambda: self.percent)
         
     def addNumber(self, numero):
         label = self.display.text()
@@ -46,11 +60,35 @@ class Calculadora(QMainWindow):
 
     def cleanDisplay(self):
         self.display.setText("0")
+        self.display2.setText("0")
 
-    def setOperation(self):
+    def deletar(self):
+        delet = self.display.text()
+        delet = delet[:-1]
+
+        if len(delet) == 0:
+            delet = "0"
+
+        self.display.setText(delet)
+
+    def invert(self):
+        numero = int(self.display.text())
+        numer = str(numero * -1)
+        self.display.setText(numer)
+
+    def percent(self):
+        perc = self.getNumberDisplay(self.display)
+        result = porcentagem(self.num1, perc)
+        self.setNumberDisplay(result)
+
+    def setOperation(self, operationList):
+        self.selectedOperation = operationList
+        self.num1 = self.getNumberDisplay(self.display)
+        self.num2 = 0
         result = self.display.text()
         self.display2.setText(result)
-        self.cleanDisplay()
+        self.display.setText("0")
+        self.btn_ac.setText("AC")
 
     def getNumberDisplay(self, display):
         num = display.text()
@@ -73,9 +111,15 @@ class Calculadora(QMainWindow):
         self.display2.setText(result)
 
     def showResult(self):
-        num1 = self.getNumberDisplay(self.display)
-        num2 = self.getNumberDisplay(self.display2)
-        result = somar(num1, num2)
+        if self.num2 == 0:
+            self.num2 = self.getNumberDisplay(self.display)
+
+        num1 = self.num1
+        num2 = self.num2
+
+        operation = self.operationList.get(self.selectedOperation)
+        result = operation(num1, num2)
+        self.num1 = result
+
         self.setNumberDisplay(result)
-        self.setCalcDisplay(num1, num2, "+")
-        
+        self.setCalcDisplay(num1, num2, self.selectedOperation)        
