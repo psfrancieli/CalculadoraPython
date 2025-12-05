@@ -10,13 +10,33 @@
     <height>447</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>270</width>
+    <height>447</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>270</width>
+    <height>447</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Calculadora</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icone.jpg</normaloff>../icone.jpg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#btn_div, #btn_vezes, #btn_menos, #btn_mais, #btn_menos, #btn_igual {
+   <string notr="true">#btn_div, #btn_vezes, #btn_mais, #btn_menos, #btn_igual {
 	background-color: #9fb2ac;
 	color: white;
+}
+
+#btn_div:hover, #btn_vezes:hover, #btn_mais:hover, #btn_menos:hover, #btn_igual:hover {
+	background-color: #7f9a92;
 }
 
 .QPushButton {
@@ -24,13 +44,25 @@
 	border-radius: 20px;
 }
 
-#btn_ac, #btn_sl, #btn_por {
+.QPushButton:hover {
+	background-color: #bfc0c4;
+}
+
+#btn_ac, #btn_inv, #btn_por {
 	background-color: #c4c4c4;
+}
+
+#btn_ac:hover, #btn_inv:hover, #btn_por:hover {
+	background-color: #a0a0a0;
 }
 
 #btn_del {
 	color: white;
 	background-color: #bd0000;
+}
+
+#btn_del:hover {
+	background-color: #9b0000;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -329,6 +361,9 @@
     <property name="text">
      <string>%</string>
     </property>
+    <property name="shortcut">
+     <string>%</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="btn_inv">
     <property name="geometry">
@@ -468,9 +503,9 @@
    <widget class="QLabel" name="display">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>80</x>
       <y>70</y>
-      <width>211</width>
+      <width>161</width>
       <height>51</height>
      </rect>
     </property>
